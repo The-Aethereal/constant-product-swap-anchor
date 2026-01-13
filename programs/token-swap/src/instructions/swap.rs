@@ -60,6 +60,7 @@ pub struct Swap<'info>{
         address = pool.vault_b,
     )]
     pub vault_b: InterfaceAccount<'info, TokenAccount>,
+    //for an ata, seeds = [authority, token_program, mint] automatically taken care
      #[account(
         init_if_needed,
         payer = user,
@@ -67,7 +68,7 @@ pub struct Swap<'info>{
         associated_token::authority = user,
         associated_token::token_program = token_program
     )]
-    pub user_ata_a: InterfaceAccount<'info, TokenAccount>,
+    pub user_ata_a: InterfaceAccount<'info, TokenAccount>, 
      #[account(
         init_if_needed,
         payer = user,
