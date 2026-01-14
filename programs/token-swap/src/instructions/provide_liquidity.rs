@@ -22,6 +22,9 @@ pub fn provide_liquidity(ctx: Context<ProvideLiquidity>, amount_a: u64, amount_b
         let lp_from_b = dy * lp_supply / y;
         lp_from_a.min(lp_from_b)
     };
+    // Take in tokens
+
+    // Mint LP tokens
 }
 
 #[derive(Account)]
