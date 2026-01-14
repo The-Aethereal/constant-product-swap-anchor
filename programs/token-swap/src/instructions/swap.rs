@@ -2,6 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, TokenInterface, TokenAccount, InterfaceAccount};
 
 use crate::state::pool::Pool;
+use crate::constants::POOL_SEED;
 
  pub fn swap_give_a_get_b(ctx: Context<Swap>, amount_a: u64) -> Result<()>{
         let vault_a = &ctx.accounts.vault_a;
@@ -46,7 +47,7 @@ pub struct Swap<'info>{
     #[account(mut)]
     pub user: Signer<'info>,
     #[account(
-        seeds = [b"pool"], 
+        seeds = POOL_SEED, 
         bump = pool.bump)]
     pub pool: Account<'info, Pool>, 
      #[account(

@@ -7,5 +7,6 @@ pub struct Pool {
     pub mint_b: Pubkey,
     pub vault_a: Pubkey,
     pub vault_b: Pubkey,
+    pub lp_mint:Pubkey,
     pub bump: u8,
 }

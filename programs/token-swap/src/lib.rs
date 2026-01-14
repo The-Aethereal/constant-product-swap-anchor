@@ -8,6 +8,10 @@ use state::*;
 pub mod instructions;
 use instructions::*;
 
+pub mod provide_liquidity;
+use provide_liquidity::*;
+
+
 pub mod constants;
 
 declare_id!("3CkXZ1WBCxWwLD24NkaEJfkMd7NN27Qoyp8dHvTYzPAR");

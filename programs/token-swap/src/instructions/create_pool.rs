@@ -10,6 +10,7 @@ pub fn createPool(ctx: Context<CreatePool>) -> Result<()> {
             mint_b : ctx.accounts.mint_b.key(),
             vault_a : ctx.accounts.vault_a.key(),
             vault_b : ctx.accounts.vault_b.key(),
+            lp_mint : ctx.accounts.lp_mint.key(),
             bump : ctx.bumps.pool,
         } ;
         Ok(())
@@ -19,7 +20,7 @@ pub fn createPool(ctx: Context<CreatePool>) -> Result<()> {
 #[derive(Accounts)]
 pub struct CreatePool<'info> {
      #[account(mut)]
-     pub payer : Signer<'info>, // payer not owner
+    pub payer : Signer<'info>, // payer not owner
     pub mint_a : InterfaceAccount<'info,Mint>, 
     pub mint_b : InterfaceAccount<'info,Mint>, 
 
@@ -46,6 +47,17 @@ pub struct CreatePool<'info> {
         bump,
     )]
     pub pool : Account<'info, Pool>, //its a pda to run forever and to be non-custodial
+
+    #[account(
+        init,
+        payer = payer,
+        mint::decimals = 6,
+        mint::authority = pool,
+        mint::freeze_authority = pool,
+        seeds = [b"mint", pool.as_bytes()],
+        bump
+    )]
+    pub lp_mint : InterfaceAccount<'info, Mint>,
     
     pub system_program : Program<'info, System>,
     pub token_program : Interface<'info, TokenInterface>,
